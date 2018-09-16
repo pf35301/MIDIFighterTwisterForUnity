@@ -18,14 +18,20 @@ namespace TwisterForUnity.Test {
 	
 	    // Update is called once per frame
 	    void Update () {
-            //Debug.Log(MidiMaster.GetKeyDown(TwisterParam.channel, TwisterParam.HandCameraTransform.x));
-
             var data = new MidiMessage(MidiJackEx.DequeueIncomingData());
 
-            Debug.Log(data.ToString());
+            if (data.data1 == TwisterParam.HandCameraTransform.x) {
+
+                if (data.data2 == TwisterParam.RightRoll) {
+                    Debug.Log("Right");
+                }
+
+                if (data.data2 == TwisterParam.LeftRoll) {
+                    Debug.Log("Left");
+                }
+
+            }
         }
-
-
     }
 
 }

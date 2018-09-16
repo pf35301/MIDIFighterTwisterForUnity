@@ -14,7 +14,10 @@ namespace TwisterForUnity {
 
         public Vector HandCameraTransform = new Vector(0, 1, 2); 
         public Vector MoveCameraTransform = new Vector(4, 5, 6); 
-        public Vector RotateCameraTransform = new Vector(8, 9, 10); 
+        public Vector RotateCameraTransform = new Vector(8, 9, 10);
+
+        public int RightRoll = 0x41;
+        public int LeftRoll = 0x3F;
 
         public void GetInfo() {
             channel = MidiJackEx.GetChannel(TwisterPortName);

@@ -25,6 +25,30 @@ namespace TwisterForUnity.MidiJack {
             return MidiChannel.All;
         }
 
+        public static uint GetId(string TargetMidiDeviceName) {
+
+            var endpointCount = CountEndpoints();
+
+            for (var i = 0; i < endpointCount; i++) {
+                var id = GetEndpointIdAtIndex(i);
+                var name = GetEndpointName(id);
+
+                if (TargetMidiDeviceName == name) {
+                    return id;
+                }
+            }
+
+            return new uint();
+        }
+
+        public static uint GetId(int Index) {
+            return GetEndpointIdAtIndex(Index);
+        }
+
+        public static uint GetId(MidiChannel channel) {
+            return GetEndpointIdAtIndex((int)channel);
+        }
+
         #region Native Plugin Interface
 
         [DllImport("MidiJackPlugin", EntryPoint = "MidiJackCountEndpoints")]

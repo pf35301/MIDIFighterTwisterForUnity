@@ -9,6 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73afa45e64644614b8126f9649e66bd0, type: 3}
-  m_Name: New Twister Object
+  m_Name: MIDIFighterTwister
   m_EditorClassIdentifier: 
-  TwisterPortName: 
+  TwisterPortName: Midi Fighter Twister
+  channel: 0
+  RightRoll: 65
+  LeftRoll: 243
