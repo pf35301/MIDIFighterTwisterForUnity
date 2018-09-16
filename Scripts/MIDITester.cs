@@ -9,7 +9,7 @@ namespace TwisterForUnity.Test {
     public class MIDITester : MonoBehaviour {
 
         [SerializeField]
-        private TwisterObject TwisterParam;
+        private TwisterParams TwisterParam;
 
 	    // Use this for initialization
 	    void Start () {
@@ -29,10 +29,9 @@ namespace TwisterForUnity.Test {
                 if (data.data2 == TwisterParam.LeftRoll) {
                     Debug.Log("Left");
                 }
-
+                
             }
         }
     }
-
 }
 
