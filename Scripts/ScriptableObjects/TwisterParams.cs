@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
-using TwisterForUnity.MidiJack;
+using TwisterForUnity.Extensions;
 
 namespace TwisterForUnity {
     [CreateAssetMenu(menuName = "MIDIFighterTwisterForUnity/Twister Parameter Object")]
@@ -37,8 +37,9 @@ namespace TwisterForUnity {
         public Vector MoveCameraTransform = new Vector(4, 5, 6); 
         public Vector RotateCameraTransform = new Vector(8, 9, 10);
 
-        public int RightRoll = 0x41;
-        public int LeftRoll = 0x3F;
+        public float MoveHandCameraGain;
+        public float MoveMoveCameraGain;
+        public float MoveRotateCameraGain;
 
         public TwisterParams(string TwisterPortName) {
             this.TwisterPortName = TwisterPortName;
@@ -60,5 +61,11 @@ namespace TwisterForUnity {
                 this.z = z;
             }
         }
+
+    }
+    public enum RollDirection : byte {
+        None = 0x00,
+        Right = 0x41,
+        Left = 0x3f
     }
 }

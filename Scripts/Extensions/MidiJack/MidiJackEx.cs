@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using MidiJack;
 
-namespace TwisterForUnity.MidiJack {
+namespace TwisterForUnity.Extensions {
 
     public static class MidiJackEx  {
 
