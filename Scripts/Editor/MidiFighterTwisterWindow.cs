@@ -23,7 +23,7 @@ namespace TwisterForUnity.Editor {
         private const string toggleEnableLabelText = "Enable";
         private const string toggleDisableLabelText = "Disable";
 
-        private TwisterInputer inputer;
+        public TwisterInputer TwisterInputer;
 
         [MenuItem("Window/MIDI Fighter Twister")]
         static void Open() {
@@ -32,7 +32,7 @@ namespace TwisterForUnity.Editor {
 
         private void Awake() {
             sceneCamera = SceneView.lastActiveSceneView.camera;
-            inputer = new TwisterInputer();
+            TwisterInputer = new TwisterInputer();
         }
 
         private void OnGUI() {
@@ -45,17 +45,16 @@ namespace TwisterForUnity.Editor {
             moveGain = EditorGUILayout.FloatField(moveGainFieldLabelText, moveGain);
 
             GUI.backgroundColor = isEnableLabelColor;
-            if (GUILayout.Button(isEnableLabelText)) {
+            if (GUILayout.Button(isEnableLabelText) && twister != null) {
 
                 isEnableTwister = !isEnableTwister;
             }
         }
 
         private void Update() {
-            inputer.Twister = twister;
 
             if (isEnableTwister) {
-                inputer.Update();
+                TwisterInputer.Update(twister);
             }
         }
     }

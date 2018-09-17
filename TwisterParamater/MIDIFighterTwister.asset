@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: MIDIFighterTwister
   m_EditorClassIdentifier: 
   TwisterPortName: Midi Fighter Twister
-  channel: 0
+  MoveHandCameraGain: 1
+  MoveMoveCameraGain: 1
+  MoveRotateCameraGain: 1
   RightRoll: 65
   LeftRoll: 243
