@@ -6,12 +6,32 @@ using TwisterForUnity.MidiJack;
 
 namespace TwisterForUnity {
     [CreateAssetMenu(menuName = "MIDIFighterTwisterForUnity/Twister Parameter Object")]
-    public class TwisterParams : ScriptableObject {
+    public sealed class TwisterParams : ScriptableObject {
 
         public string TwisterPortName;
+        private bool initialized = false;
 
-        public MidiChannel channel;
-        public uint Id;
+        public MidiChannel Channel {
+            get {
+                if (!initialized) {
+                    GetInfo();
+                    initialized = true;
+                }
+                return channel;
+            }
+        }
+        public uint Id {
+            get {
+                if(!initialized) {
+                    GetInfo();
+                    initialized = false;
+                }
+                return id;
+            }
+        }
+
+        private MidiChannel channel;
+        private uint id;
 
         public Vector HandCameraTransform = new Vector(0, 1, 2); 
         public Vector MoveCameraTransform = new Vector(4, 5, 6); 
@@ -20,9 +40,13 @@ namespace TwisterForUnity {
         public int RightRoll = 0x41;
         public int LeftRoll = 0x3F;
 
+        public TwisterParams(string TwisterPortName) {
+            this.TwisterPortName = TwisterPortName;
+        }
+
         public void GetInfo() {
             channel = MidiJackEx.GetChannel(TwisterPortName);
-            Id = MidiJackEx.GetId(channel);
+            id = MidiJackEx.GetId(channel);
         }
 
         public class Vector {
