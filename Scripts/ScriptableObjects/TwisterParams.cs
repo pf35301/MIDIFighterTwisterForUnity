@@ -33,9 +33,8 @@ namespace TwisterForUnity {
         private MidiChannel channel;
         private uint id;
 
-        public float MoveHandCameraGain;
-        public float MoveMoveCameraGain;
-        public float MoveRotateCameraGain;
+        public float MovePositionGain;
+        public float MoveRotateGain;
 
         public TwisterParams(string TwisterPortName) {
             this.TwisterPortName = TwisterPortName;
