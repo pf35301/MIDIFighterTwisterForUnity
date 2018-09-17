@@ -13,9 +13,8 @@ namespace TwisterForUnity.Editor {
     public sealed class MidiFighterTwisterWindow : EditorWindow {
 
         private TwisterParams twister;
-        private Camera sceneCamera;
+        private SceneCameraMover mainCameraMover;
 
-        private float moveGain = 1.0f;
         private bool isEnableTwister = false;
 
         private const string twisterFieldLabelText = "Twister Params Object";
@@ -31,8 +30,16 @@ namespace TwisterForUnity.Editor {
         }
 
         private void Awake() {
-            sceneCamera = SceneView.lastActiveSceneView.camera;
             TwisterInputer = new TwisterInputer();
+            mainCameraMover = new SceneCameraMover(SceneView.lastActiveSceneView);
+
+            TwisterInputer.TwisterEvent00.AddListener(mainCameraMover.MovePositionX);
+            TwisterInputer.TwisterEvent01.AddListener(mainCameraMover.MovePositionY);
+            TwisterInputer.TwisterEvent02.AddListener(mainCameraMover.MovePositionZ);
+
+            TwisterInputer.TwisterEvent04.AddListener(mainCameraMover.MoveRotationX);
+            TwisterInputer.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
+            TwisterInputer.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
         }
 
         private void OnGUI() {
@@ -41,8 +48,6 @@ namespace TwisterForUnity.Editor {
             var isEnableLabelColor = isEnableTwister ? Color.green : Color.red;
 
             twister = EditorGUILayout.ObjectField(twisterFieldLabelText, twister, typeof(TwisterParams), false) as TwisterParams;
-
-            moveGain = EditorGUILayout.FloatField(moveGainFieldLabelText, moveGain);
 
             GUI.backgroundColor = isEnableLabelColor;
             if (GUILayout.Button(isEnableLabelText) && twister != null) {

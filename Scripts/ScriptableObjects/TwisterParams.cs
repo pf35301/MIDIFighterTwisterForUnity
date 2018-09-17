@@ -33,13 +33,8 @@ namespace TwisterForUnity {
         private MidiChannel channel;
         private uint id;
 
-        public Vector HandCameraTransform = new Vector(0, 1, 2); 
-        public Vector MoveCameraTransform = new Vector(4, 5, 6); 
-        public Vector RotateCameraTransform = new Vector(8, 9, 10);
-
-        public float MoveHandCameraGain;
-        public float MoveMoveCameraGain;
-        public float MoveRotateCameraGain;
+        public float MovePositionGain;
+        public float MoveRotateGain;
 
         public TwisterParams(string TwisterPortName) {
             this.TwisterPortName = TwisterPortName;
@@ -49,19 +44,6 @@ namespace TwisterForUnity {
             channel = MidiJackEx.GetChannel(TwisterPortName);
             id = MidiJackEx.GetId(channel);
         }
-
-        public class Vector {
-            public int x;
-            public int y;
-            public int z;
-
-            public Vector(int x, int y, int z) {
-                this.x = x;
-                this.y = y;
-                this.z = z;
-            }
-        }
-
     }
     public enum RollDirection : byte {
         None = 0x00,
