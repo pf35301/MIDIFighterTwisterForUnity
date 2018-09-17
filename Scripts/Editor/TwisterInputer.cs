@@ -10,22 +10,22 @@ using MidiJack;
 namespace TwisterForUnity.Editor {
     public sealed class TwisterInputer {
 
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent00 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent01 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent02 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent03 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent04 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent05 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent06 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent07 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent08 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent09 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent10 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent11 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent12 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent13 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent14 = new TwisterHandler<TwisterParams, RollDirection>();
-        public TwisterHandler<TwisterParams, RollDirection> TwisterEvent15 = new TwisterHandler<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent00 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent01 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent02 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent03 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent04 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent05 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent06 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent07 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent08 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent09 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent10 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent11 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent12 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent13 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent14 = new TwisterEvent<TwisterParams, RollDirection>();
+        public TwisterEvent<TwisterParams, RollDirection> TwisterEvent15 = new TwisterEvent<TwisterParams, RollDirection>();
 
         public enum TwisterNumber : byte {
             TwisterNumber00 = 0x00,
@@ -109,7 +109,7 @@ namespace TwisterForUnity.Editor {
             }
         }
 
-        public sealed class TwisterHandler<TwisterParams, RollDirection> : UnityEvent<TwisterParams, RollDirection> {
+        public sealed class TwisterEvent<TwisterParams, RollDirection> : UnityEvent<TwisterParams, RollDirection> {
 
         }
     }
