@@ -1,0 +1,5 @@
+﻿MidiJack https://github.com/keijiro/MidiJack
+
+Copyright (C) 2013-2015 Keijiro Takahashi
+Released under the MIT license
+https://github.com/keijiro/MidiJack/blob/master/README.md#license
