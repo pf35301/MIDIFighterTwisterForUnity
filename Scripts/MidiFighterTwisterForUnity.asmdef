@@ -1,0 +1,10 @@
+{
+    "name": "MidiFighterTwisterForUnity",
+    "references": [
+        "MidiJack"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
