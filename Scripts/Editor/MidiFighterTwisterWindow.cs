@@ -17,10 +17,13 @@ namespace TwisterForUnity.Editor {
 
         private bool isEnableTwister = false;
 
-        private const string twisterFieldLabelText = "Twister Params Object";
-        private const string moveGainFieldLabelText = "Camera Move Gain";
-        private const string toggleEnableLabelText = "Enable";
-        private const string toggleDisableLabelText = "Disable";
+        private const string twisterFieldText = "Twister Params Object";
+        private const string toggleEnableText = "Enable";
+        private const string toggleDisableText = "Disable";
+        private const string saveButtonText = "Save";
+        private const string loadButtonText = "Load";
+
+        private const string TwisterParamsPrefsKey = "TWISTER_PARAMATER";
 
         public TwisterInputer TwisterInputer;
 
@@ -44,16 +47,34 @@ namespace TwisterForUnity.Editor {
 
         private void OnGUI() {
 
-            var isEnableLabelText = isEnableTwister ? toggleEnableLabelText : toggleDisableLabelText;
+            var isEnableLabelText = isEnableTwister ? toggleEnableText : toggleDisableText;
             var isEnableLabelColor = isEnableTwister ? Color.green : Color.red;
 
-            twister = EditorGUILayout.ObjectField(twisterFieldLabelText, twister, typeof(TwisterParams), false) as TwisterParams;
+            twister = EditorGUILayout.ObjectField(twisterFieldText, twister, typeof(TwisterParams), false) as TwisterParams;
+
+            if (GUILayout.Button(saveButtonText)) {
+                saveInspectorConfig();
+            }
+
+            if (GUILayout.Button(loadButtonText)) {
+                loadInspectorConfig();
+            }
 
             GUI.backgroundColor = isEnableLabelColor;
             if (GUILayout.Button(isEnableLabelText) && twister != null) {
 
                 isEnableTwister = !isEnableTwister;
             }
+        }
+
+        private void saveInspectorConfig() {
+            int id = twister.GetInstanceID();
+            EditorPrefs.SetInt(TwisterParamsPrefsKey, id);
+        }
+
+        private void loadInspectorConfig() {
+            int id = EditorPrefs.GetInt(TwisterParamsPrefsKey);
+            twister = EditorUtility.InstanceIDToObject(id) as TwisterParams;
         }
 
         private void Update() {

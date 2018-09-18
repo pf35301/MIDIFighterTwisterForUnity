@@ -46,8 +46,9 @@ namespace TwisterForUnity {
         }
     }
     public enum RollDirection : byte {
-        None = 0x00,
         Right = 0x41,
-        Left = 0x3f
+        Left = 0x3f,
+        PressDown = 0x7f,
+        PressUp = 0x00
     }
 }
