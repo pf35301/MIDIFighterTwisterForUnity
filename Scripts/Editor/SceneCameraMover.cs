@@ -14,7 +14,6 @@ namespace TwisterForUnity.Editor {
 
         public SceneCameraMover(SceneView sceneView) {
             this.mainSceneView = sceneView;
-            Debug.Log(sceneView.name);
         }
 
         public void MovePositionX(TwisterParams TwisterParameter, byte rollData) {
