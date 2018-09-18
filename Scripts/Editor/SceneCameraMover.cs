@@ -128,6 +128,17 @@ namespace TwisterForUnity.Editor {
             }
         }
 
+        public void ChangeOrthographic(TwisterParams TwisterParameter, byte rollData) {
+            //Debug.Log("ChangeOrthographic");
+            var rollDirection = EnumConverter.ToEnum<RollDirection>(rollData);
+
+            switch (rollDirection) {
+                case RollDirection.PressDown:
+                    mainSceneView.orthographic = !mainSceneView.orthographic;
+                    break;
+            }
+        }
+
         private int DirectionSign(RollDirection rollDirection) {
             int sign = -1;
             if (rollDirection == RollDirection.Right) {
