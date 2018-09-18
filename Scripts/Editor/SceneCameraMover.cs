@@ -61,8 +61,19 @@ namespace TwisterForUnity.Editor {
             }
         }
 
+        public void ResetPosition(TwisterParams TwisterParameter, byte rollData) {
+            Debug.Log("ResetPos");
+            var rollDirection = EnumConverter.ToEnum<RollDirection>(rollData);
+
+            switch (rollDirection) {
+                case RollDirection.PressDown:
+                    mainSceneView.pivot = Vector3.zero;
+                    break;
+            }
+        }
+
         public void MoveRotationX(TwisterParams TwisterParameter, byte rollData) {
-                //Debug.Log("rotX");
+            //Debug.Log("rotX");
             var rollDirection = EnumConverter.ToEnum<RollDirection>(rollData);
 
             switch (rollDirection) {
@@ -71,7 +82,7 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    mainSceneView.rotation = Quaternion.AngleAxis(TwisterParameter.MoveRotateGain * DirectionSign(rollDirection), Vector3.right) * mainSceneView.rotation;
+                    mainSceneView.rotation = Quaternion.Euler((Vector3.right * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -86,7 +97,7 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    mainSceneView.rotation = Quaternion.AngleAxis(TwisterParameter.MoveRotateGain * DirectionSign(rollDirection), Vector3.up) * mainSceneView.rotation;
+                    mainSceneView.rotation = Quaternion.Euler((Vector3.up * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -101,7 +112,18 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    mainSceneView.rotation = Quaternion.AngleAxis(TwisterParameter.MoveRotateGain * DirectionSign(rollDirection), Vector3.forward) * mainSceneView.rotation;
+                    mainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    break;
+            }
+        }
+
+        public void ResetRotation(TwisterParams TwisterParametr, byte rollData) {
+            Debug.Log("ResetRota");
+            var rollDirection = EnumConverter.ToEnum<RollDirection>(rollData);
+
+            switch (rollDirection) {
+                case RollDirection.PressDown:
+                    mainSceneView.rotation = new Quaternion(default(Quaternion).x, default(Quaternion).y, default(Quaternion).z, default(Quaternion).w);
                     break;
             }
         }

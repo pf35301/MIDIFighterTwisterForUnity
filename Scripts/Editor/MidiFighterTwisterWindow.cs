@@ -39,10 +39,12 @@ namespace TwisterForUnity.Editor {
             TwisterInputer.TwisterEvent00.AddListener(mainCameraMover.MovePositionX);
             TwisterInputer.TwisterEvent01.AddListener(mainCameraMover.MovePositionY);
             TwisterInputer.TwisterEvent02.AddListener(mainCameraMover.MovePositionZ);
+            TwisterInputer.TwisterEvent03.AddListener(mainCameraMover.ResetPosition);
 
             TwisterInputer.TwisterEvent04.AddListener(mainCameraMover.MoveRotationX);
             TwisterInputer.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
             TwisterInputer.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
+            TwisterInputer.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
         }
 
         private void OnGUI() {
