@@ -82,7 +82,7 @@ namespace TwisterForUnity.Editor {
         private void Update() {
 
             if (isEnableTwister) {
-                TwisterInputer.Update(twister);
+                TwisterInputer?.Update(twister);
             }
         }
     }
