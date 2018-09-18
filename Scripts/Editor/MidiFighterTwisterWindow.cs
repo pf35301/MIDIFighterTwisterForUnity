@@ -45,6 +45,8 @@ namespace TwisterForUnity.Editor {
             TwisterInputer.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
             TwisterInputer.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
             TwisterInputer.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
+
+            TwisterInputer.TwisterEvent15.AddListener(mainCameraMover.ChangeOrthographic);
         }
 
         private void OnGUI() {
@@ -82,7 +84,7 @@ namespace TwisterForUnity.Editor {
         private void Update() {
 
             if (isEnableTwister) {
-                TwisterInputer.Update(twister);
+                TwisterInputer?.Update(twister);
             }
         }
     }
