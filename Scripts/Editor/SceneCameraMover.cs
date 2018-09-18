@@ -62,7 +62,7 @@ namespace TwisterForUnity.Editor {
         }
 
         public void ResetPosition(TwisterParams TwisterParameter, byte rollData) {
-            Debug.Log("ResetPos");
+            //Debug.Log("ResetPos");
             var rollDirection = EnumConverter.ToEnum<RollDirection>(rollData);
 
             switch (rollDirection) {
@@ -118,7 +118,7 @@ namespace TwisterForUnity.Editor {
         }
 
         public void ResetRotation(TwisterParams TwisterParametr, byte rollData) {
-            Debug.Log("ResetRota");
+            //Debug.Log("ResetRota");
             var rollDirection = EnumConverter.ToEnum<RollDirection>(rollData);
 
             switch (rollDirection) {
