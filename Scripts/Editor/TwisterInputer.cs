@@ -8,7 +8,9 @@ using TwisterForUnity.Extensions;
 using MidiJack;
 
 namespace TwisterForUnity.Editor {
-    public sealed class TwisterInputer {
+    public sealed class SingletonTwisterInputer {
+
+        private static SingletonTwisterInputer singletonInstance = new SingletonTwisterInputer();
 
         public TwisterEvent<TwisterParams, byte> TwisterEvent00 = new TwisterEvent<TwisterParams, byte>();
         public TwisterEvent<TwisterParams, byte> TwisterEvent01 = new TwisterEvent<TwisterParams, byte>();
@@ -27,27 +29,11 @@ namespace TwisterForUnity.Editor {
         public TwisterEvent<TwisterParams, byte> TwisterEvent14 = new TwisterEvent<TwisterParams, byte>();
         public TwisterEvent<TwisterParams, byte> TwisterEvent15 = new TwisterEvent<TwisterParams, byte>();
 
-        public enum TwisterNumber : byte {
-            TwisterNumber00 = 0x00,
-            TwisterNumber01 = 0x01,
-            TwisterNumber02 = 0x02,
-            TwisterNumber03 = 0x03,
-            TwisterNumber04 = 0x04,
-            TwisterNumber05 = 0x05,
-            TwisterNumber06 = 0x06,
-            TwisterNumber07 = 0x07,
-            TwisterNumber08 = 0x08,
-            TwisterNumber09 = 0x09,
-            TwisterNumber10 = 0x0A,
-            TwisterNumber11 = 0x0B,
-            TwisterNumber12 = 0x0C,
-            TwisterNumber13 = 0x0D,
-            TwisterNumber14 = 0x0E,
-            TwisterNumber15 = 0x0F
+        public static SingletonTwisterInputer GetInstance() {
+            return singletonInstance;
         }
 
-        public void Update(TwisterParams Twister) {
-            var message = new MidiMessage(MidiJackEx.DequeueIncomingData());
+        public void Update(TwisterParams Twister, MidiMessage message) {
 
             if (Twister.Id != message.source) {
                 return;
@@ -107,6 +93,25 @@ namespace TwisterForUnity.Editor {
                     TwisterEvent15.Invoke(twister, rollData);
                     break;
             }
+        }
+
+        public enum TwisterNumber : byte {
+            TwisterNumber00 = 0x00,
+            TwisterNumber01 = 0x01,
+            TwisterNumber02 = 0x02,
+            TwisterNumber03 = 0x03,
+            TwisterNumber04 = 0x04,
+            TwisterNumber05 = 0x05,
+            TwisterNumber06 = 0x06,
+            TwisterNumber07 = 0x07,
+            TwisterNumber08 = 0x08,
+            TwisterNumber09 = 0x09,
+            TwisterNumber10 = 0x0A,
+            TwisterNumber11 = 0x0B,
+            TwisterNumber12 = 0x0C,
+            TwisterNumber13 = 0x0D,
+            TwisterNumber14 = 0x0E,
+            TwisterNumber15 = 0x0F
         }
 
         public sealed class TwisterEvent<T1, T2> : UnityEvent<T1, T2> {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
-using TwisterForUnity;
+using TwisterForUnity.Extensions;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -16,6 +16,7 @@ namespace TwisterForUnity.Editor {
         private SceneCameraMover mainCameraMover;
 
         private bool isEnableTwister = false;
+        private bool isInitialized = false; 
 
         private const string twisterFieldText = "Twister Params Object";
         private const string toggleEnableText = "Enable";
@@ -25,15 +26,17 @@ namespace TwisterForUnity.Editor {
 
         private const string TwisterParamsPrefsKey = "TWISTER_PARAMATER";
 
-        public TwisterInputer TwisterInputer;
+        private SingletonTwisterInputer TwisterInputer;
 
         [MenuItem("Window/MIDI Fighter Twister")]
-        static void Open() {
-            GetWindow<MidiFighterTwisterWindow>();
+        private static void Open() {
+            var window = GetWindow<MidiFighterTwisterWindow>();
+
+            window.Init();
         }
 
-        private void Awake() {
-            TwisterInputer = new TwisterInputer();
+        private void Init() {
+            TwisterInputer = SingletonTwisterInputer.GetInstance();
             mainCameraMover = new SceneCameraMover(SceneView.lastActiveSceneView);
 
             TwisterInputer.TwisterEvent00.AddListener(mainCameraMover.MovePositionX);
@@ -47,6 +50,8 @@ namespace TwisterForUnity.Editor {
             TwisterInputer.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
 
             TwisterInputer.TwisterEvent15.AddListener(mainCameraMover.ChangeOrthographic);
+
+            isInitialized = true;
         }
 
         private void OnGUI() {
@@ -82,9 +87,14 @@ namespace TwisterForUnity.Editor {
         }
 
         private void Update() {
+            var message = new MidiMessage(MidiJackEx.DequeueIncomingData());
+
+            if (!isInitialized) {
+                Init();
+            }
 
             if (isEnableTwister) {
-                TwisterInputer?.Update(twister);
+                TwisterInputer.Update(twister, message);
             }
         }
     }
