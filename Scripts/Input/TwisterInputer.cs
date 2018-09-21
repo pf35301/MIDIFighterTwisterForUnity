@@ -7,7 +7,7 @@ using TwisterForUnity;
 using TwisterForUnity.Extensions;
 using MidiJack;
 
-namespace TwisterForUnity.Editor {
+namespace TwisterForUnity.Input {
     public sealed class SingletonTwisterInputer {
 
         private static SingletonTwisterInputer singletonInstance = new SingletonTwisterInputer();
@@ -33,7 +33,8 @@ namespace TwisterForUnity.Editor {
             return singletonInstance;
         }
 
-        public void Update(TwisterParams Twister, MidiMessage message) {
+        public void Update(TwisterParams Twister) {
+            var message = new MidiMessage(MidiJackEx.DequeueIncomingData());
 
             if (Twister.Id != message.source) {
                 return;

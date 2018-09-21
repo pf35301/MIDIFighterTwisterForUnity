@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
 using TwisterForUnity.Extensions;
+using TwisterForUnity.Input;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,7 +14,7 @@ namespace TwisterForUnity.Editor {
     public sealed class MidiFighterTwisterWindow : EditorWindow {
 
         private TwisterParams twister;
-        private SceneCameraMover mainCameraMover;
+        private EventBinder binder;
 
         private bool isEnableTwister = false;
         private bool isInitialized = false; 
@@ -26,8 +27,6 @@ namespace TwisterForUnity.Editor {
 
         private const string TwisterParamsPrefsKey = "TWISTER_PARAMATER";
 
-        private SingletonTwisterInputer TwisterInputer;
-
         [MenuItem("Window/MIDI Fighter Twister")]
         private static void Open() {
             var window = GetWindow<MidiFighterTwisterWindow>();
@@ -36,21 +35,7 @@ namespace TwisterForUnity.Editor {
         }
 
         private void Init() {
-            TwisterInputer = SingletonTwisterInputer.GetInstance();
-            mainCameraMover = new SceneCameraMover(SceneView.lastActiveSceneView);
-
-            TwisterInputer.TwisterEvent00.AddListener(mainCameraMover.MovePositionX);
-            TwisterInputer.TwisterEvent01.AddListener(mainCameraMover.MovePositionY);
-            TwisterInputer.TwisterEvent02.AddListener(mainCameraMover.MovePositionZ);
-            TwisterInputer.TwisterEvent03.AddListener(mainCameraMover.ResetPosition);
-
-            TwisterInputer.TwisterEvent04.AddListener(mainCameraMover.MoveRotationX);
-            TwisterInputer.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
-            TwisterInputer.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
-            TwisterInputer.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
-
-            TwisterInputer.TwisterEvent15.AddListener(mainCameraMover.ChangeOrthographic);
-
+            binder = new EventBinder();
             isInitialized = true;
         }
 
@@ -87,15 +72,15 @@ namespace TwisterForUnity.Editor {
         }
 
         private void Update() {
-            var message = new MidiMessage(MidiJackEx.DequeueIncomingData());
-
-            if (!isInitialized) {
+            if (isInitialized == false) {
                 Init();
             }
 
-            if (isEnableTwister) {
-                TwisterInputer.Update(twister, message);
+            if(twister == null) {
+                return;
             }
+
+            binder.Update(twister);
         }
     }
 }
