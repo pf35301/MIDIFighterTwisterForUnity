@@ -116,7 +116,7 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    mainSceneView.rotation = Quaternion.Euler((Vector3.left * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    mainSceneView.rotation = Quaternion.Euler((Vector3.right * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -131,7 +131,6 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    Debug.Log("rotation:" + mainSceneView.rotation.eulerAngles);
                     mainSceneView.rotation = Quaternion.Euler((Vector3.up * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
                     break;
             }
@@ -147,8 +146,7 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    Debug.Log("rotation:" + mainSceneView.rotation.eulerAngles);
-                    mainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    mainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.);
                     break;
             }
         }
