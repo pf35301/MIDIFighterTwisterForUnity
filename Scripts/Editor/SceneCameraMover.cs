@@ -112,7 +112,7 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case RollDirection.PressDown:
-                    mainSceneView.rotation = new Quaternion(default(Quaternion).x, mainSceneView.rotation.y, default(Quaternion).z, mainSceneView.rotation.w);
+                    mainSceneView.rotation = new Quaternion(default(Quaternion).x, mainSceneView.rotation.y, mainSceneView.rotation.z, mainSceneView.rotation.w);
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
@@ -127,7 +127,7 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case RollDirection.PressDown:
-                    mainSceneView.rotation = new Quaternion(default(Quaternion).x, default(Quaternion).y, mainSceneView.rotation.z, mainSceneView.rotation.w);
+                    mainSceneView.rotation = new Quaternion(mainSceneView.rotation.x, default(Quaternion).y, mainSceneView.rotation.z, mainSceneView.rotation.w);
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
@@ -143,7 +143,7 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case RollDirection.PressDown:
-                    mainSceneView.rotation = new Quaternion(mainSceneView.rotation.x, default(Quaternion).y, default(Quaternion).z, mainSceneView.rotation.w);
+                    mainSceneView.rotation = new Quaternion(mainSceneView.rotation.x, mainSceneView.rotation.y, default(Quaternion).z, mainSceneView.rotation.w);
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
