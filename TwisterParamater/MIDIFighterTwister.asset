@@ -14,5 +14,5 @@ MonoBehaviour:
   TwisterPortName: Midi Fighter Twister
   MovePositionGain: 0.8
   MoveRotationGain: 0.2
-  CCMidiRangeMin: 127
-  CCMidiRangeMax: 0
+  CCMidiRangeMin: 0
+  CCMidiRangeMax: 127

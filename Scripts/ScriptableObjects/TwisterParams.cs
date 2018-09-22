@@ -33,8 +33,16 @@ namespace TwisterForUnity {
         private MidiChannel channel;
         private uint id;
 
+        [Header("Gain")]
+        [Header("Position")]
         public float MovePositionGain;
+        public float MovePositionGainMax;
+        public float MovePositionGainMin;
+
+        [Header("Rotation")]
         public float MoveRotationGain;
+        public float MoveRotationGainMax;
+        public float MoveRotationGainMin;
 
         [Header("MIDI Fighter Twister")]
         public byte CCMidiRangeMin;
@@ -57,7 +65,7 @@ namespace TwisterForUnity {
         PressUp = 0x00
     }
 
-    public enum MidiStatus : byte {
+    public enum TwisterMidiStatus : byte {
         Press = 0xB1,
         Roll = 0xB0
     }

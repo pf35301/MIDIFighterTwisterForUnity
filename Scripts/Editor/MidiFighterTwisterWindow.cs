@@ -46,6 +46,8 @@ namespace TwisterForUnity.Editor {
 
             twister = EditorGUILayout.ObjectField(twisterFieldText, twister, typeof(TwisterParams), false) as TwisterParams;
 
+            var defaultColor = GUI.backgroundColor;
+
             if (GUILayout.Button(saveButtonText)) {
                 saveInspectorConfig();
             }
@@ -58,6 +60,13 @@ namespace TwisterForUnity.Editor {
             if (GUILayout.Button(isEnableLabelText) && twister != null) {
 
                 isEnableTwister = !isEnableTwister;
+            }
+
+            GUI.backgroundColor = defaultColor;
+
+            if (twister != null) {
+                twister.MovePositionGain = EditorGUILayout.Slider("MovePositionGain", twister.MovePositionGain, twister.MovePositionGainMin, twister.MovePositionGainMax);
+                twister.MoveRotationGain = EditorGUILayout.Slider("MoveRotationGain", twister.MoveRotationGain, twister.MoveRotationGainMin, twister.MoveRotationGainMax);
             }
         }
 

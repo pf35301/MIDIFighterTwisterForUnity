@@ -25,11 +25,13 @@ namespace TwisterForUnity.Editor {
             twisterInputer?.TwisterEvent01.AddListener(mainCameraMover.MovePositionY);
             twisterInputer?.TwisterEvent02.AddListener(mainCameraMover.MovePositionZ);
             twisterInputer?.TwisterEvent03.AddListener(mainCameraMover.ResetPosition);
+            twisterInputer?.TwisterEvent03.AddListener(mainCameraMover.SetPositionGain);
 
             twisterInputer?.TwisterEvent04.AddListener(mainCameraMover.MoveRotationX);
             twisterInputer?.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
             twisterInputer?.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
             twisterInputer?.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
+            twisterInputer?.TwisterEvent07.AddListener(mainCameraMover.SetRotationGain);
 
             twisterInputer?.TwisterEvent15.AddListener(mainCameraMover.ChangeOrthographic);
         }
