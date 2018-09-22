@@ -146,7 +146,7 @@ namespace TwisterForUnity.Editor {
                     break;
                 case RollDirection.Right:
                 case RollDirection.Left:
-                    mainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.);
+                    mainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotateGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
                     break;
             }
         }
