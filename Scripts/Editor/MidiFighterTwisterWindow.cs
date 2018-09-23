@@ -13,11 +13,13 @@ using UnityEditor;
 namespace TwisterForUnity.Editor {
     public sealed class MidiFighterTwisterWindow : EditorWindow {
 
+        [SerializeField]
         private TwisterParams twister;
+        [SerializeField]
         private EventBinder binder;
 
+        [SerializeField]
         private bool isEnableTwister = false;
-        private bool isInitialized = false; 
 
         private const string twisterFieldText = "Twister Params Object";
         private const string toggleEnableText = "Enable";
@@ -36,7 +38,6 @@ namespace TwisterForUnity.Editor {
 
         private void Init() {
             binder = new EventBinder();
-            isInitialized = true;
         }
 
         private void OnGUI() {
@@ -81,9 +82,6 @@ namespace TwisterForUnity.Editor {
         }
 
         private void Update() {
-            if (isInitialized == false) {
-                Init();
-            }
 
             if(twister == null) {
                 return;

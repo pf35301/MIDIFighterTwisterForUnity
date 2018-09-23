@@ -8,6 +8,8 @@ using UnityEditor;
 #endif
 
 namespace TwisterForUnity.Editor {
+
+    [System.Serializable]
     public sealed class SceneCameraMover {
 
         private SceneView mainSceneView;
