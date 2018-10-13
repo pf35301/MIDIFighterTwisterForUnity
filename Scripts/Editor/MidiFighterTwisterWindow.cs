@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MidiJack;
-using TwisterForUnity;
+using TwisterForUnity.Extensions;
+using TwisterForUnity.Input;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,80 +13,64 @@ using UnityEditor;
 namespace TwisterForUnity.Editor {
     public sealed class MidiFighterTwisterWindow : EditorWindow {
 
-        private TwisterParams twister;
-        private SceneCameraMover mainCameraMover;
+        [SerializeField]
+        private TwisterParams m_Twister;
+        [SerializeField]
+        private EventBinder m_Binder;
 
-        private bool isEnableTwister = false;
+        private const string TWISTERFIELDTEXT = "Twister Params Object";
+        private const string SAVEBUTTONTEXT = "Save";
+        private const string LOADBUTTONTEXT = "Load";
 
-        private const string twisterFieldText = "Twister Params Object";
-        private const string toggleEnableText = "Enable";
-        private const string toggleDisableText = "Disable";
-        private const string saveButtonText = "Save";
-        private const string loadButtonText = "Load";
+        private const string TWISTERPARAMSPREFSKEY = "TWISTER_PARAMATER";
 
-        private const string TwisterParamsPrefsKey = "TWISTER_PARAMATER";
+        [MenuItem("Window/Midi Fighter Twister For Unity")]
+        private static void Open() {
+            var window = GetWindow<MidiFighterTwisterWindow>();
 
-        public TwisterInputer TwisterInputer;
-
-        [MenuItem("Window/MIDI Fighter Twister")]
-        static void Open() {
-            GetWindow<MidiFighterTwisterWindow>();
+            window.Init();
         }
 
-        private void Awake() {
-            TwisterInputer = new TwisterInputer();
-            mainCameraMover = new SceneCameraMover(SceneView.lastActiveSceneView);
-
-            TwisterInputer.TwisterEvent00.AddListener(mainCameraMover.MovePositionX);
-            TwisterInputer.TwisterEvent01.AddListener(mainCameraMover.MovePositionY);
-            TwisterInputer.TwisterEvent02.AddListener(mainCameraMover.MovePositionZ);
-            TwisterInputer.TwisterEvent03.AddListener(mainCameraMover.ResetPosition);
-
-            TwisterInputer.TwisterEvent04.AddListener(mainCameraMover.MoveRotationX);
-            TwisterInputer.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
-            TwisterInputer.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
-            TwisterInputer.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
-
-            TwisterInputer.TwisterEvent15.AddListener(mainCameraMover.ChangeOrthographic);
+        private void Init() {
+            m_Binder = new EventBinder();
         }
 
         private void OnGUI() {
+            m_Twister = EditorGUILayout.ObjectField(TWISTERFIELDTEXT, m_Twister, typeof(TwisterParams), false) as TwisterParams;
 
-            var isEnableLabelText = isEnableTwister ? toggleEnableText : toggleDisableText;
-            var isEnableLabelColor = isEnableTwister ? Color.green : Color.red;
+            var defaultColor = GUI.backgroundColor;
 
-            twister = EditorGUILayout.ObjectField(twisterFieldText, twister, typeof(TwisterParams), false) as TwisterParams;
-
-            if (GUILayout.Button(saveButtonText)) {
+            if (GUILayout.Button(SAVEBUTTONTEXT)) {
                 saveInspectorConfig();
             }
 
-            if (GUILayout.Button(loadButtonText)) {
+            if (GUILayout.Button(LOADBUTTONTEXT)) {
                 loadInspectorConfig();
             }
 
-            GUI.backgroundColor = isEnableLabelColor;
-            if (GUILayout.Button(isEnableLabelText) && twister != null) {
-
-                isEnableTwister = !isEnableTwister;
+            if (m_Twister != null) {
+                m_Twister.MovePositionGain = EditorGUILayout.Slider("MovePositionGain", m_Twister.MovePositionGain, m_Twister.MovePositionGainMin, m_Twister.MovePositionGainMax);
+                m_Twister.MoveRotationGain = EditorGUILayout.Slider("MoveRotationGain", m_Twister.MoveRotationGain, m_Twister.MoveRotationGainMin, m_Twister.MoveRotationGainMax);
             }
         }
 
         private void saveInspectorConfig() {
-            int id = twister.GetInstanceID();
-            EditorPrefs.SetInt(TwisterParamsPrefsKey, id);
+            int id = m_Twister.GetInstanceID();
+            EditorPrefs.SetInt(TWISTERPARAMSPREFSKEY, id);
         }
 
         private void loadInspectorConfig() {
-            int id = EditorPrefs.GetInt(TwisterParamsPrefsKey);
-            twister = EditorUtility.InstanceIDToObject(id) as TwisterParams;
+            int id = EditorPrefs.GetInt(TWISTERPARAMSPREFSKEY);
+            m_Twister = EditorUtility.InstanceIDToObject(id) as TwisterParams;
         }
 
         private void Update() {
 
-            if (isEnableTwister) {
-                TwisterInputer?.Update(twister);
+            if(m_Twister == null) {
+                return;
             }
+
+            m_Binder.Update(m_Twister);
         }
     }
 }
