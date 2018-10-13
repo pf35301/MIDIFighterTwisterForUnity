@@ -24,7 +24,7 @@ namespace TwisterForUnity.Editor {
 
         private const string TWISTERPARAMSPREFSKEY = "TWISTER_PARAMATER";
 
-        [MenuItem("Window/MIDI Fighter Twister")]
+        [MenuItem("Window/Midi Fighter Twister For Unity")]
         private static void Open() {
             var window = GetWindow<MidiFighterTwisterWindow>();
 

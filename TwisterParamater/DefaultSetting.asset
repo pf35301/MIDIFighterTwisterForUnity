@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73afa45e64644614b8126f9649e66bd0, type: 3}
-  m_Name: MIDIFighterTwister
+  m_Name: DefaultSetting
   m_EditorClassIdentifier: 
   TwisterPortName: Midi Fighter Twister
-  MovePositionGain: -1
+  MovePositionGain: 0.38582683
   MovePositionGainMax: 1
   MovePositionGainMin: -1
-  MoveRotationGain: 1
+  MoveRotationGain: 0.33858263
   MoveRotationGainMax: 1
   MoveRotationGainMin: -1
   CCMidiRangeMin: 0
