@@ -9,22 +9,22 @@ namespace TwisterForUnity {
     public sealed class TwisterParams : ScriptableObject {
 
         public string TwisterPortName;
-        private bool initialized = false;
+        private bool m_Initialized = false;
 
         public MidiChannel Channel {
             get {
-                if (!initialized) {
+                if (!m_Initialized) {
                     GetInfo();
-                    initialized = true;
+                    m_Initialized = true;
                 }
                 return channel;
             }
         }
         public uint Id {
             get {
-                if(!initialized) {
+                if(!m_Initialized) {
                     GetInfo();
-                    initialized = false;
+                    m_Initialized = false;
                 }
                 return id;
             }

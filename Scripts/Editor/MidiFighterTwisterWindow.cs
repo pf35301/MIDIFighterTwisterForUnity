@@ -14,20 +14,15 @@ namespace TwisterForUnity.Editor {
     public sealed class MidiFighterTwisterWindow : EditorWindow {
 
         [SerializeField]
-        private TwisterParams twister;
+        private TwisterParams m_Twister;
         [SerializeField]
-        private EventBinder binder;
+        private EventBinder m_Binder;
 
-        [SerializeField]
-        private bool isEnableTwister = false;
+        private const string TWISTERFIELDTEXT = "Twister Params Object";
+        private const string SAVEBUTTONTEXT = "Save";
+        private const string LOADBUTTONTEXT = "Load";
 
-        private const string twisterFieldText = "Twister Params Object";
-        private const string toggleEnableText = "Enable";
-        private const string toggleDisableText = "Disable";
-        private const string saveButtonText = "Save";
-        private const string loadButtonText = "Load";
-
-        private const string TwisterParamsPrefsKey = "TWISTER_PARAMATER";
+        private const string TWISTERPARAMSPREFSKEY = "TWISTER_PARAMATER";
 
         [MenuItem("Window/MIDI Fighter Twister")]
         private static void Open() {
@@ -37,57 +32,45 @@ namespace TwisterForUnity.Editor {
         }
 
         private void Init() {
-            binder = new EventBinder();
+            m_Binder = new EventBinder();
         }
 
         private void OnGUI() {
-
-            var isEnableLabelText = isEnableTwister ? toggleEnableText : toggleDisableText;
-            var isEnableLabelColor = isEnableTwister ? Color.green : Color.red;
-
-            twister = EditorGUILayout.ObjectField(twisterFieldText, twister, typeof(TwisterParams), false) as TwisterParams;
+            m_Twister = EditorGUILayout.ObjectField(TWISTERFIELDTEXT, m_Twister, typeof(TwisterParams), false) as TwisterParams;
 
             var defaultColor = GUI.backgroundColor;
 
-            if (GUILayout.Button(saveButtonText)) {
+            if (GUILayout.Button(SAVEBUTTONTEXT)) {
                 saveInspectorConfig();
             }
 
-            if (GUILayout.Button(loadButtonText)) {
+            if (GUILayout.Button(LOADBUTTONTEXT)) {
                 loadInspectorConfig();
             }
 
-            GUI.backgroundColor = isEnableLabelColor;
-            if (GUILayout.Button(isEnableLabelText) && twister != null) {
-
-                isEnableTwister = !isEnableTwister;
-            }
-
-            GUI.backgroundColor = defaultColor;
-
-            if (twister != null) {
-                twister.MovePositionGain = EditorGUILayout.Slider("MovePositionGain", twister.MovePositionGain, twister.MovePositionGainMin, twister.MovePositionGainMax);
-                twister.MoveRotationGain = EditorGUILayout.Slider("MoveRotationGain", twister.MoveRotationGain, twister.MoveRotationGainMin, twister.MoveRotationGainMax);
+            if (m_Twister != null) {
+                m_Twister.MovePositionGain = EditorGUILayout.Slider("MovePositionGain", m_Twister.MovePositionGain, m_Twister.MovePositionGainMin, m_Twister.MovePositionGainMax);
+                m_Twister.MoveRotationGain = EditorGUILayout.Slider("MoveRotationGain", m_Twister.MoveRotationGain, m_Twister.MoveRotationGainMin, m_Twister.MoveRotationGainMax);
             }
         }
 
         private void saveInspectorConfig() {
-            int id = twister.GetInstanceID();
-            EditorPrefs.SetInt(TwisterParamsPrefsKey, id);
+            int id = m_Twister.GetInstanceID();
+            EditorPrefs.SetInt(TWISTERPARAMSPREFSKEY, id);
         }
 
         private void loadInspectorConfig() {
-            int id = EditorPrefs.GetInt(TwisterParamsPrefsKey);
-            twister = EditorUtility.InstanceIDToObject(id) as TwisterParams;
+            int id = EditorPrefs.GetInt(TWISTERPARAMSPREFSKEY);
+            m_Twister = EditorUtility.InstanceIDToObject(id) as TwisterParams;
         }
 
         private void Update() {
 
-            if(twister == null) {
+            if(m_Twister == null) {
                 return;
             }
 
-            binder.Update(twister);
+            m_Binder.Update(m_Twister);
         }
     }
 }

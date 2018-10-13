@@ -10,7 +10,7 @@ using MidiJack;
 namespace TwisterForUnity.Input {
     public sealed class SingletonTwisterInputer {
 
-        private static SingletonTwisterInputer singletonInstance = new SingletonTwisterInputer();
+        private static SingletonTwisterInputer SingletonInstance = new SingletonTwisterInputer();
 
         public TwisterEvent<TwisterParams, byte, byte> TwisterEvent00 = new TwisterEvent<TwisterParams, byte, byte>();
         public TwisterEvent<TwisterParams, byte, byte> TwisterEvent01 = new TwisterEvent<TwisterParams, byte, byte>();
@@ -30,7 +30,7 @@ namespace TwisterForUnity.Input {
         public TwisterEvent<TwisterParams, byte, byte> TwisterEvent15 = new TwisterEvent<TwisterParams, byte, byte>();
 
         public static SingletonTwisterInputer GetInstance() {
-            return singletonInstance;
+            return SingletonInstance;
         }
 
         public void Update(TwisterParams Twister) {

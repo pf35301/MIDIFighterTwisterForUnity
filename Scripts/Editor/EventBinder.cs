@@ -12,34 +12,34 @@ namespace TwisterForUnity.Editor {
     [System.Serializable]
     public class EventBinder {
 
-        private SingletonTwisterInputer twisterInputer;
-        private SceneCameraMover mainCameraMover;
+        private SingletonTwisterInputer m_TwisterInputer;
+        private SceneCameraMover m_MainCameraMover;
 
         public EventBinder() {
-            twisterInputer = SingletonTwisterInputer.GetInstance();
-            mainCameraMover = new SceneCameraMover(SceneView.lastActiveSceneView);
+            m_TwisterInputer = SingletonTwisterInputer.GetInstance();
+            m_MainCameraMover = new SceneCameraMover(SceneView.lastActiveSceneView);
 
             Bind();
         }
 
         public void Bind() {
-            twisterInputer?.TwisterEvent00.AddListener(mainCameraMover.MovePositionX);
-            twisterInputer?.TwisterEvent01.AddListener(mainCameraMover.MovePositionY);
-            twisterInputer?.TwisterEvent02.AddListener(mainCameraMover.MovePositionZ);
-            twisterInputer?.TwisterEvent03.AddListener(mainCameraMover.ResetPosition);
-            twisterInputer?.TwisterEvent03.AddListener(mainCameraMover.SetPositionGain);
+            m_TwisterInputer?.TwisterEvent00.AddListener(m_MainCameraMover.MovePositionX);
+            m_TwisterInputer?.TwisterEvent01.AddListener(m_MainCameraMover.MovePositionY);
+            m_TwisterInputer?.TwisterEvent02.AddListener(m_MainCameraMover.MovePositionZ);
+            m_TwisterInputer?.TwisterEvent03.AddListener(m_MainCameraMover.ResetPosition);
+            m_TwisterInputer?.TwisterEvent03.AddListener(m_MainCameraMover.SetPositionGain);
 
-            twisterInputer?.TwisterEvent04.AddListener(mainCameraMover.MoveRotationX);
-            twisterInputer?.TwisterEvent05.AddListener(mainCameraMover.MoveRotationY);
-            twisterInputer?.TwisterEvent06.AddListener(mainCameraMover.MoveRotationZ);
-            twisterInputer?.TwisterEvent07.AddListener(mainCameraMover.ResetRotation);
-            twisterInputer?.TwisterEvent07.AddListener(mainCameraMover.SetRotationGain);
+            m_TwisterInputer?.TwisterEvent04.AddListener(m_MainCameraMover.MoveRotationX);
+            m_TwisterInputer?.TwisterEvent05.AddListener(m_MainCameraMover.MoveRotationY);
+            m_TwisterInputer?.TwisterEvent06.AddListener(m_MainCameraMover.MoveRotationZ);
+            m_TwisterInputer?.TwisterEvent07.AddListener(m_MainCameraMover.ResetRotation);
+            m_TwisterInputer?.TwisterEvent07.AddListener(m_MainCameraMover.SetRotationGain);
 
-            twisterInputer?.TwisterEvent15.AddListener(mainCameraMover.ChangeOrthographic);
+            m_TwisterInputer?.TwisterEvent15.AddListener(m_MainCameraMover.ChangeOrthographic);
         }
 
         public void Update(TwisterParams twister) {
-            twisterInputer.Update(twister);
+            m_TwisterInputer.Update(twister);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace TwisterForUnity.Editor {
     [System.Serializable]
     public sealed class SceneCameraMover {
 
-        private SceneView mainSceneView;
+        private SceneView m_MainSceneView;
 
         public SceneCameraMover(SceneView sceneView) {
-            this.mainSceneView = sceneView;
+            this.m_MainSceneView = sceneView;
         }
 
         public void MovePosition(TwisterParams TwisterParameter, byte status, byte rollData, Vector3 Ratio) {
@@ -24,13 +24,13 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.pivot = new Vector3(reverseFlag(Ratio.x) * mainSceneView.pivot.x, 
-                                                      reverseFlag(Ratio.y) * mainSceneView.pivot.y,
-                                                      reverseFlag(Ratio.z) * mainSceneView.pivot.z);
+                    m_MainSceneView.pivot = new Vector3(reverseFlag(Ratio.x) * m_MainSceneView.pivot.x, 
+                                                      reverseFlag(Ratio.y) * m_MainSceneView.pivot.y,
+                                                      reverseFlag(Ratio.z) * m_MainSceneView.pivot.z);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.pivot += Ratio * TwisterParameter.MovePositionGain * DirectionSign(rollDirection);
+                    m_MainSceneView.pivot += Ratio * TwisterParameter.MovePositionGain * DirectionSign(rollDirection);
                     break;
             }
         }
@@ -41,11 +41,11 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.pivot = new Vector3(0, mainSceneView.pivot.y, mainSceneView.pivot.z);
+                    m_MainSceneView.pivot = new Vector3(0, m_MainSceneView.pivot.y, m_MainSceneView.pivot.z);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.pivot += new Vector3(TwisterParameter.MovePositionGain * DirectionSign(rollDirection), 0, 0); 
+                    m_MainSceneView.pivot += new Vector3(TwisterParameter.MovePositionGain * DirectionSign(rollDirection), 0, 0); 
                     break;
             }
         }
@@ -56,11 +56,11 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.pivot = new Vector3(mainSceneView.pivot.x, 0, mainSceneView.pivot.z);
+                    m_MainSceneView.pivot = new Vector3(m_MainSceneView.pivot.x, 0, m_MainSceneView.pivot.z);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.pivot += new Vector3(0, TwisterParamter.MovePositionGain * DirectionSign(rollDirection), 0);
+                    m_MainSceneView.pivot += new Vector3(0, TwisterParamter.MovePositionGain * DirectionSign(rollDirection), 0);
                     break;
             }
         }
@@ -71,11 +71,11 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.pivot = new Vector3(mainSceneView.pivot.x, mainSceneView.pivot.y, 0);
+                    m_MainSceneView.pivot = new Vector3(m_MainSceneView.pivot.x, m_MainSceneView.pivot.y, 0);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.pivot += new Vector3(0, 0, TwisterParameter.MovePositionGain * DirectionSign(rollDirection));
+                    m_MainSceneView.pivot += new Vector3(0, 0, TwisterParameter.MovePositionGain * DirectionSign(rollDirection));
                     break;
             }
         }
@@ -90,7 +90,7 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.pivot = Vector3.zero;
+                    m_MainSceneView.pivot = Vector3.zero;
                     break;
             }
         }
@@ -101,13 +101,13 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.rotation = Quaternion.Euler(reverseFlag(Ratio.x) * mainSceneView.rotation.eulerAngles.x,
-                                                              reverseFlag(Ratio.y) * mainSceneView.rotation.eulerAngles.y,
-                                                              reverseFlag(Ratio.z) * mainSceneView.rotation.eulerAngles.z);
+                    m_MainSceneView.rotation = Quaternion.Euler(reverseFlag(Ratio.x) * m_MainSceneView.rotation.eulerAngles.x,
+                                                              reverseFlag(Ratio.y) * m_MainSceneView.rotation.eulerAngles.y,
+                                                              reverseFlag(Ratio.z) * m_MainSceneView.rotation.eulerAngles.z);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.rotation = Quaternion.Euler((Ratio * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    m_MainSceneView.rotation = Quaternion.Euler((Ratio * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + m_MainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -118,11 +118,11 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.rotation = new Quaternion(default(Quaternion).x, mainSceneView.rotation.y, mainSceneView.rotation.z, mainSceneView.rotation.w);
+                    m_MainSceneView.rotation = new Quaternion(default(Quaternion).x, m_MainSceneView.rotation.y, m_MainSceneView.rotation.z, m_MainSceneView.rotation.w);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.rotation = Quaternion.Euler((Vector3.right * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    m_MainSceneView.rotation = Quaternion.Euler((Vector3.right * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + m_MainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -133,11 +133,11 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.rotation = new Quaternion(mainSceneView.rotation.x, default(Quaternion).y, mainSceneView.rotation.z, mainSceneView.rotation.w);
+                    m_MainSceneView.rotation = new Quaternion(m_MainSceneView.rotation.x, default(Quaternion).y, m_MainSceneView.rotation.z, m_MainSceneView.rotation.w);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.rotation = Quaternion.Euler((Vector3.up * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    m_MainSceneView.rotation = Quaternion.Euler((Vector3.up * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + m_MainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -148,11 +148,11 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.rotation = new Quaternion(mainSceneView.rotation.x, mainSceneView.rotation.y, default(Quaternion).z, mainSceneView.rotation.w);
+                    m_MainSceneView.rotation = new Quaternion(m_MainSceneView.rotation.x, m_MainSceneView.rotation.y, default(Quaternion).z, m_MainSceneView.rotation.w);
                     break;
                 case Direction3FTo41.Right:
                 case Direction3FTo41.Left:
-                    mainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + mainSceneView.rotation.eulerAngles);
+                    m_MainSceneView.rotation = Quaternion.Euler((Vector3.forward * TwisterParameter.MoveRotationGain * DirectionSign(rollDirection)) + m_MainSceneView.rotation.eulerAngles);
                     break;
             }
         }
@@ -167,7 +167,7 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.rotation = new Quaternion(default(Quaternion).x, default(Quaternion).y, default(Quaternion).z, default(Quaternion).w);
+                    m_MainSceneView.rotation = new Quaternion(default(Quaternion).x, default(Quaternion).y, default(Quaternion).z, default(Quaternion).w);
                     break;
             }
         }
@@ -178,7 +178,7 @@ namespace TwisterForUnity.Editor {
 
             switch (rollDirection) {
                 case Direction3FTo41.PressDown:
-                    mainSceneView.orthographic = !mainSceneView.orthographic;
+                    m_MainSceneView.orthographic = !m_MainSceneView.orthographic;
                     break;
             }
         }
