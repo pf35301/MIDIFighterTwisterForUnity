@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 using MidiJack;
 using TwisterForUnity.Extensions;
@@ -44,9 +45,26 @@ namespace TwisterForUnity {
         public float MoveRotationGainMax;
         public float MoveRotationGainMin;
 
+        //[TODO]
+        //public PropertyChangeEvent ChangeTheNumberOfTwisterHandler = new PropertyChangeEvent(); 
+
         [Header("MIDI Fighter Twister")]
         public byte CCMidiRangeMin;
         public byte CCMidiRangeMax;
+        public byte TheNumberOfTwister = 0x0f;
+        
+        //[TODO]
+        /*
+        public byte TheNumberOfTwister {
+            set {
+                ChangeTheNumberOfTwisterHandler.Invoke();
+                theNumberOfTwister = value;
+            }
+            get {
+                return theNumberOfTwister;
+            }
+        }
+        */
 
         public TwisterParams(string TwisterPortName) {
             this.TwisterPortName = TwisterPortName;
@@ -68,5 +86,9 @@ namespace TwisterForUnity {
     public enum TwisterMidiStatus : byte {
         Press = 0xB1,
         Roll = 0xB0
+    }
+
+    public sealed class PropertyChangeEvent : UnityEvent {
+
     }
 }

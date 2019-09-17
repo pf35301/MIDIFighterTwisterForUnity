@@ -8,6 +8,7 @@ namespace TwisterForUnity.Extensions {
             }
             else {
                 throw new ArgumentException();
+
             }
         }
     }

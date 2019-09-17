@@ -27,16 +27,18 @@ namespace TwisterForUnity.Editor {
         [MenuItem("Window/Midi Fighter Twister For Unity")]
         private static void Open() {
             var window = GetWindow<MidiFighterTwisterWindow>();
-
-            window.Init();
-        }
-
-        private void Init() {
-            m_Binder = new EventBinder();
         }
 
         private void OnGUI() {
             m_Twister = EditorGUILayout.ObjectField(TWISTERFIELDTEXT, m_Twister, typeof(TwisterParams), false) as TwisterParams;
+
+            if (m_Binder == null) {
+                if (m_Twister == null) {
+                    Debug.Log("please set a TwiterParameter");
+                    return;
+                }
+                m_Binder = new EventBinder(m_Twister);
+            }
 
             var defaultColor = GUI.backgroundColor;
 
@@ -70,7 +72,7 @@ namespace TwisterForUnity.Editor {
                 return;
             }
 
-            m_Binder.Update(m_Twister);
+            m_Binder?.Update(m_Twister);
         }
     }
 }
