@@ -4,7 +4,7 @@
 
 UnityのSceneビューを[Midi Fighter Twister](https://store.djtechtools.com/products/midi-fighter-twister)を使ってグリグリしようとしてる。
 
-https://twitter.com/pf35301/status/1041683928174624768
+https://twitter.com/8picomu/status/1041683928174624768
 
 ## 使い方
 1. [Midi Fighter Twister](https://store.djtechtools.com/products/midi-fighter-twister)をPCに接
